@@ -26,7 +26,7 @@ public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdater;
-    public static final String EXTRA_TITLE = "com.derrick.park.criminalmind.title";
+    public static final String EXTRA_ID = "com.derrick.park.criminalmind.id";
 
 
     @Override
@@ -62,7 +62,6 @@ public class CrimeListFragment extends Fragment {
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
             mImageView = (ImageView) itemView.findViewById(R.id.Image_solved);
 
-
         }
 // ADDING ONCLICK + TOAST MESSAGE:
         public void bind(final Crime crime) {
@@ -81,8 +80,10 @@ public class CrimeListFragment extends Fragment {
             itemView.setOnClickListener((new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), CrimeActivity.class);
-                    intent.putExtra(EXTRA_TITLE,crime.getTitle() );
+
+                    // on click, we get intent object that was created in CrimeFragment.
+                    // that intent contains String id, which we turn into UUDI
+                    Intent intent = CrimeFragment.newIntent(getActivity(), crime.getId().toString());
                     v.getContext().startActivity(intent);
                                              }
 
